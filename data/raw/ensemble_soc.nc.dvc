@@ -1,0 +1,4 @@
+outs:
+- md5: b585d362418b27c843a860af60a05f43
+  size: 79251141
+  path: ensemble_soc.nc

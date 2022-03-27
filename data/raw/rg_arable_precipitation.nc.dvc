@@ -1,0 +1,4 @@
+outs:
+- md5: d289ce214a06ca0def4adccb4cb2fa74
+  size: 132060221
+  path: rg_arable_precipitation.nc

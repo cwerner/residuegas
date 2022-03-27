@@ -1,0 +1,4 @@
+outs:
+- md5: 52b2451ccae8c8c53c10876d80fef987
+  size: 133129869
+  path: rg_arable_temp-yearly.nc

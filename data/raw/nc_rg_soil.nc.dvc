@@ -1,0 +1,4 @@
+outs:
+- md5: b8320ab6281120a26ae7e0a36710d601
+  size: 3867836
+  path: nc_rg_soil.nc

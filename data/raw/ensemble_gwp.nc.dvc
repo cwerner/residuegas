@@ -1,0 +1,4 @@
+outs:
+- md5: a095ddb5b74c7445f90d8fce149dfed3
+  size: 42871640
+  path: ensemble_gwp.nc
