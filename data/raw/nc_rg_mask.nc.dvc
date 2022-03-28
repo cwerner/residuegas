@@ -1,0 +1,4 @@
+outs:
+- md5: 455f032ee9da390c6a6b9a1af638df6d
+  size: 1792808
+  path: nc_rg_mask.nc

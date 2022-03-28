@@ -1,0 +1,4 @@
+outs:
+- md5: e4f1161fd68f704cad898e60df971940
+  size: 42950767
+  path: ensemble_nstrawexp.nc
