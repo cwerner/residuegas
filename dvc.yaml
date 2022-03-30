@@ -30,4 +30,11 @@ stages:
     - data/processed/y_train_gwp.csv.gz
     - data/processed/y_test.csv.gz
     outs:
-    - models/model_n2o.pkl.z   
+    - models/model_n2o.pkl.z
+
+  test:
+    cmd: >-
+      python scripts/inference.py --test
+    deps:
+    - models/model_n2o.pkl.z
+   

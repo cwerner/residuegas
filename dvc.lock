@@ -71,3 +71,9 @@ stages:
     - path: models/model_n2o.pkl.z
       md5: e66de5ec3a2bda2567e76f50b25274f1
       size: 365698007
+  test:
+    cmd: python scripts/inference.py --test
+    deps:
+    - path: models/model_n2o.pkl.z
+      md5: e66de5ec3a2bda2567e76f50b25274f1
+      size: 365698007
