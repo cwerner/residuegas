@@ -21,22 +21,7 @@ def drop_unnamed(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns=drop_vars, axis=1, errors='ignore')
     return df.loc[:,~df.columns.str.match("Unnamed")]
 
-def infer(model, df):
-
-    pipeline_n2o = Pipeline([
-        ("one_hot", OneHotEncoder(cols=["mana"])),
-        #("freq_encode_species", CountEncoder(cols=["species"])),
-        ("rf", RandomForestRegressor(
-            verbose=True, 
-            n_estimators=500,
-            max_features=10,
-            max_depth=15)),
-    ])
-
-    return model.predict(df)
-
 def test(model):
-
     # load testset
     X_test = pd.read_csv( "data/processed/x_test.csv.gz" )
     X_test = drop_unnamed(X_test)
@@ -71,7 +56,7 @@ def main():
     if args.test:
         model = load_model_n2o()
         result = test(model)
-        print(f"Test acc {result}")
+        print(f"TEST SCORE N2O: {result:.2f}")
     else:
         if args.data:
             df = pd.read_csv(args.data)
@@ -91,7 +76,8 @@ def main():
             df = pd.DataFrame(data, index=[0])
 
         model = load_model_n2o()
-        result = infer(model, df)
+        result = model.predict(df)
+
         if len(result) == 1:
             print(f"Predicted N2O emission: {result[0]} kg N2O-N ha-1 yr-1")
         else:
