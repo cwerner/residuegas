@@ -1,6 +1,5 @@
 netcdf4
 xarray
-streamlit
 dask-ml
 scikit-learn
 category_encoders
