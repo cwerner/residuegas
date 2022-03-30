@@ -69,11 +69,8 @@ stages:
       size: 67607902
     outs:
     - path: models/model_n2o.pkl.z
-      md5: e66de5ec3a2bda2567e76f50b25274f1
-      size: 365698007
-  test:
-    cmd: python scripts/inference.py --test
-    deps:
-    - path: models/model_n2o.pkl.z
-      md5: e66de5ec3a2bda2567e76f50b25274f1
-      size: 365698007
+      md5: 8f4388ce7aba4b925c86632932f1df05
+      size: 365574672
+    - path: summary.json
+      md5: 9c1ef0c761d35614567804b4520dc5aa
+      size: 75

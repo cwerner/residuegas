@@ -20,6 +20,10 @@ import random
 
 from dask.distributed import Client, LocalCluster
 
+import time
+import json
+
+
 SOURCE = Path("data") / "processed" 
 DEST = Path("models")
 
@@ -76,12 +80,29 @@ if __name__ == '__main__':
     ])
 
     with joblib.parallel_backend("dask"):
+
+        start = time.time()
         pipeline_n2o.fit(X_train, y_train_n2o)
+        end = time.time()
+        duration = end - start
+
         score = pipeline_n2o.score(X_test, y_test['n2o'])
         print(f"SCORE N2O: {score:.2f}")
         
     # save models
     joblib.dump(pipeline_n2o, (DEST / "model_n2o.pkl.z").resolve())
+
+
+    # save metrics
+    with open('summary.json', 'w') as fp:
+
+        metrics_data = {
+            "train": {"accuracy": score},
+            "duration": duration
+        }
+
+        json.dump(metrics_data, fp)
+
 
     exit()
 

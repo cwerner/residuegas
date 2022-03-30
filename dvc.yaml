@@ -31,10 +31,7 @@ stages:
     - data/processed/y_test.csv.gz
     outs:
     - models/model_n2o.pkl.z
+    metrics:
+    - summary.json:
+        cache: false
 
-  test:
-    cmd: >-
-      python scripts/inference.py --test
-    deps:
-    - models/model_n2o.pkl.z
-   
