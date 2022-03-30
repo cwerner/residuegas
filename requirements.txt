@@ -1,8 +1,6 @@
-netcdf4
-xarray
-streamlit
-dask-ml
-scikit-learn
-category_encoders
-shap
+netcdf4>=1.5.8
+dask>=2022.3.0
+dask-ml>=2022.1.22
+xarray>=2022.3.0
+category_encoders>=2.4.0
 

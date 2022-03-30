@@ -1,0 +1,37 @@
+stages:
+  preprocessing:
+    cmd: >-
+      python scripts/preprocessing.py
+    deps:
+    - data/raw/nc_rg_soil.nc
+    - data/raw/nc_rg_mask.nc
+    - data/raw/rg_arable_precipitation.nc
+    - data/raw/rg_arable_temp-yearly.nc
+    - data/raw/ensemble_n2o.nc
+    - data/raw/ensemble_gwp.nc
+    - data/raw/rg_arable_airchem_rcp45_1950-2100.txt.gz
+    - data/raw/rg_arable_airchem_rcp85_1950-2100.txt.gz
+    outs:
+    - data/processed/x_train.csv.gz
+    - data/processed/x_test.csv.gz
+    - data/processed/y_train.csv.gz
+    - data/processed/y_train_n2o.csv.gz
+    - data/processed/y_train_gwp.csv.gz
+    - data/processed/y_test.csv.gz
+
+  training:
+    cmd: >-
+      python scripts/train.py
+    deps:
+    - data/processed/x_train.csv.gz
+    - data/processed/x_test.csv.gz
+    - data/processed/y_train.csv.gz
+    - data/processed/y_train_n2o.csv.gz
+    - data/processed/y_train_gwp.csv.gz
+    - data/processed/y_test.csv.gz
+    outs:
+    - models/model_n2o.pkl.z
+    metrics:
+    - summary.json:
+        cache: false
+

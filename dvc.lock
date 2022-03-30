@@ -1,0 +1,76 @@
+schema: '2.0'
+stages:
+  preprocessing:
+    cmd: python scripts/preprocessing.py
+    deps:
+    - path: data/raw/ensemble_gwp.nc
+      md5: a095ddb5b74c7445f90d8fce149dfed3
+      size: 42871640
+    - path: data/raw/ensemble_n2o.nc
+      md5: 137573ce968b78f4daac282b3fcff4ba
+      size: 81618371
+    - path: data/raw/nc_rg_mask.nc
+      md5: 455f032ee9da390c6a6b9a1af638df6d
+      size: 1792808
+    - path: data/raw/nc_rg_soil.nc
+      md5: b8320ab6281120a26ae7e0a36710d601
+      size: 3867836
+    - path: data/raw/rg_arable_airchem_rcp45_1950-2100.txt.gz
+      md5: 917cadc2b74155f0088e1529516f8ffa
+      size: 3707360
+    - path: data/raw/rg_arable_airchem_rcp85_1950-2100.txt.gz
+      md5: 9110283b67b7866567760c4e95541f58
+      size: 3731100
+    - path: data/raw/rg_arable_precipitation.nc
+      md5: d289ce214a06ca0def4adccb4cb2fa74
+      size: 132060221
+    - path: data/raw/rg_arable_temp-yearly.nc
+      md5: 52b2451ccae8c8c53c10876d80fef987
+      size: 133129869
+    outs:
+    - path: data/processed/x_test.csv.gz
+      md5: 6b572ec9cea5dcff7f839d9562623c4a
+      size: 57443690
+    - path: data/processed/x_train.csv.gz
+      md5: 408a81ca31b25a691538135f9c7358be
+      size: 229787557
+    - path: data/processed/y_test.csv.gz
+      md5: 5f6e2c6547e9b8db0c78deea1fb171ac
+      size: 27918024
+    - path: data/processed/y_train.csv.gz
+      md5: 9c2994ca48916076b97dda6bb0905e5a
+      size: 111698058
+    - path: data/processed/y_train_gwp.csv.gz
+      md5: 97355e20b2b2631599b704aabba08ac1
+      size: 65269187
+    - path: data/processed/y_train_n2o.csv.gz
+      md5: e8087a3fdf0003a97ac5800453dd6f73
+      size: 67607902
+  training:
+    cmd: python scripts/train.py
+    deps:
+    - path: data/processed/x_test.csv.gz
+      md5: 6b572ec9cea5dcff7f839d9562623c4a
+      size: 57443690
+    - path: data/processed/x_train.csv.gz
+      md5: 408a81ca31b25a691538135f9c7358be
+      size: 229787557
+    - path: data/processed/y_test.csv.gz
+      md5: 5f6e2c6547e9b8db0c78deea1fb171ac
+      size: 27918024
+    - path: data/processed/y_train.csv.gz
+      md5: 9c2994ca48916076b97dda6bb0905e5a
+      size: 111698058
+    - path: data/processed/y_train_gwp.csv.gz
+      md5: 97355e20b2b2631599b704aabba08ac1
+      size: 65269187
+    - path: data/processed/y_train_n2o.csv.gz
+      md5: e8087a3fdf0003a97ac5800453dd6f73
+      size: 67607902
+    outs:
+    - path: models/model_n2o.pkl.z
+      md5: 8f4388ce7aba4b925c86632932f1df05
+      size: 365574672
+    - path: summary.json
+      md5: 9c1ef0c761d35614567804b4520dc5aa
+      size: 75
