@@ -1,0 +1,45 @@
+artifacts:
+  data:
+    hash: 924386faef7bdd14272f1863dd2405a5
+    size: 152436378
+    type: dvc
+    uri: x_test.csv
+object_type: dataset
+reader:
+  dataset_type:
+    columns:
+    - ''
+    - rcp
+    - mana
+    - soc
+    - bd
+    - ph
+    - sand
+    - silt
+    - clay
+    - precip
+    - temp
+    - crop
+    - co2
+    dtypes:
+    - int64
+    - object
+    - object
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    index_cols:
+    - ''
+    type: dataframe
+  format: csv
+  type: pandas
+requirements:
+- module: pandas
+  version: 1.4.1

@@ -1,0 +1,25 @@
+artifacts:
+  data:
+    hash: 65a83e6b58f7a441def6880807d1f141
+    size: 220880588
+    type: dvc
+    uri: y_train.csv
+object_type: dataset
+reader:
+  dataset_type:
+    columns:
+    - ''
+    - n2o
+    - gwp
+    dtypes:
+    - int64
+    - float64
+    - float64
+    index_cols:
+    - ''
+    type: dataframe
+  format: csv
+  type: pandas
+requirements:
+- module: pandas
+  version: 1.4.1

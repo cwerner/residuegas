@@ -12,26 +12,26 @@ stages:
     - data/raw/rg_arable_airchem_rcp45_1950-2100.txt.gz
     - data/raw/rg_arable_airchem_rcp85_1950-2100.txt.gz
     outs:
-    - data/processed/x_train.csv.gz
-    - data/processed/x_test.csv.gz
-    - data/processed/y_train.csv.gz
-    - data/processed/y_train_n2o.csv.gz
-    - data/processed/y_train_gwp.csv.gz
-    - data/processed/y_test.csv.gz
+    - data/processed/x_train.csv
+    - data/processed/x_test.csv
+    - data/processed/y_train.csv
+    - data/processed/y_train_n2o.csv
+    - data/processed/y_train_gwp.csv
+    - data/processed/y_test.csv
 
   training:
     cmd: >-
       python scripts/train.py
     deps:
-    - data/processed/x_train.csv.gz
-    - data/processed/x_test.csv.gz
-    - data/processed/y_train.csv.gz
-    - data/processed/y_train_n2o.csv.gz
-    - data/processed/y_train_gwp.csv.gz
-    - data/processed/y_test.csv.gz
+    - data/processed/x_train.csv
+    - data/processed/x_test.csv
+    - data/processed/y_train.csv
+    - data/processed/y_train_n2o.csv
+    - data/processed/y_train_gwp.csv
+    - data/processed/y_test.csv
     outs:
-    - models/model_n2o.pkl.z
+    - models/rf_n2o
     metrics:
-    - summary.json:
+    - metrics.json:
         cache: false
 
