@@ -4,3 +4,9 @@
 /y_train_n2o.csv.gz
 /y_train_gwp.csv.gz
 /y_test.csv.gz
+/x_train.csv
+/x_test.csv
+/y_train.csv
+/y_train_n2o.csv
+/y_train_gwp.csv
+/y_test.csv
