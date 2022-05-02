@@ -4,6 +4,8 @@ import pandas as pd
 import xarray as xr
 from dask_ml.model_selection import train_test_split
 
+from mlem.api import save
+
 from typing import Any, Dict
 
 SOURCE = Path("data") / "raw" 
@@ -68,20 +70,20 @@ def merge_data() -> pd.DataFrame:
     return df
 
 
-def split_and_write_data(df: pd.DataFrame,*, seed=42) -> None:
+def split_and_write_data(df: pd.DataFrame, *, seed:int = 42) -> None:
     df = df.drop(['ID', 'lat', 'lon', 'year'], axis= 1)
 
     X_train, X_test, y_train, y_test = train_test_split(df.drop(['n2o', 'gwp'], axis=1), df[['n2o', 'gwp']], shuffle=True, train_size=0.8, random_state=seed)
-    y_train_n2o, y_train_gwp = y_train['n2o'], y_train['gwp']
-    #y_test_n2o, y_test_gwp = y_test['n2o'], y_test['gwp']
+    y_train_n2o, y_train_gwp = y_train[['n2o']], y_train[['gwp']]
 
-    gzip_args = {'method': 'gzip', 'compresslevel': 1}
-    X_train.to_csv(DEST / "x_train.csv.gz", compression=gzip_args)
-    X_test.to_csv(DEST / "x_test.csv.gz", compression=gzip_args)
-    y_train.to_csv(DEST / "y_train.csv.gz", compression=gzip_args)
-    y_test.to_csv(DEST / "y_test.csv.gz", compression=gzip_args)
-    y_train_n2o.to_csv(DEST / "y_train_n2o.csv.gz", compression=gzip_args)
-    y_train_gwp.to_csv(DEST / "y_train_gwp.csv.gz", compression=gzip_args)
+    #gzip_args = {'method': 'gzip', 'compresslevel': '1'}
+    #params = {'compression': 'gzip'}
+    save(X_train, str(DEST / "x_train.csv"), link=True, external=True) #, compression=gzip_args)
+    save(X_test, str(DEST / "x_test.csv"), link=True, external=True) #, compression=gzip_args)
+    save(y_train, str(DEST / "y_train.csv"), link=True, external=True)
+    save(y_test, str(DEST / "y_test.csv"), link=True, external=True)
+    save(y_train_n2o, str(DEST / "y_train_n2o.csv"), link=True, external=True)
+    save(y_train_gwp, str(DEST / "y_train_gwp.csv"), link=True, external=True)
 
 
 def main():
