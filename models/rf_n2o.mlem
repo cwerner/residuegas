@@ -1,0 +1,107 @@
+artifacts:
+  data:
+    hash: aac5c92777758dc402b237a7d78e7327
+    size: 1040667005
+    type: dvc
+    uri: rf_n2o
+description: Random Forest Regressor N2O
+model_type:
+  methods:
+    predict:
+      args:
+      - name: data
+        type_:
+          columns:
+          - ''
+          - mana_1
+          - mana_2
+          - mana_3
+          - mana_4
+          - soc
+          - bd
+          - ph
+          - sand
+          - silt
+          - clay
+          - precip
+          - temp
+          - co2
+          dtypes:
+          - int64
+          - int64
+          - int64
+          - int64
+          - int64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          index_cols:
+          - ''
+          type: dataframe
+      name: predict
+      returns:
+        dtype: float64
+        shape:
+        - null
+        type: ndarray
+    sklearn_predict:
+      args:
+      - name: X
+        type_:
+          columns:
+          - ''
+          - mana_1
+          - mana_2
+          - mana_3
+          - mana_4
+          - soc
+          - bd
+          - ph
+          - sand
+          - silt
+          - clay
+          - precip
+          - temp
+          - co2
+          dtypes:
+          - int64
+          - int64
+          - int64
+          - int64
+          - int64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          - float64
+          index_cols:
+          - ''
+          type: dataframe
+      name: predict
+      returns:
+        dtype: float64
+        shape:
+        - null
+        type: ndarray
+  type: sklearn
+object_type: model
+requirements:
+- module: sklearn
+  version: 1.0.2
+- module: pandas
+  version: 1.4.1
+- module: numpy
+  version: 1.21.5
+tags:
+- random-forest
+- regressor

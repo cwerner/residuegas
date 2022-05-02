@@ -1,0 +1,45 @@
+artifacts:
+  data:
+    hash: 22d3b5cde4f2af399f96b2cc777f2112
+    size: 609728440
+    type: dvc
+    uri: x_train.csv
+object_type: dataset
+reader:
+  dataset_type:
+    columns:
+    - ''
+    - rcp
+    - mana
+    - soc
+    - bd
+    - ph
+    - sand
+    - silt
+    - clay
+    - precip
+    - temp
+    - crop
+    - co2
+    dtypes:
+    - int64
+    - object
+    - object
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    - float64
+    index_cols:
+    - ''
+    type: dataframe
+  format: csv
+  type: pandas
+requirements:
+- module: pandas
+  version: 1.4.1

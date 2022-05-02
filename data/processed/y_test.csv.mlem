@@ -1,0 +1,25 @@
+artifacts:
+  data:
+    hash: 3fa8f27760978afce3a09e83d1d9e267
+    size: 55210790
+    type: dvc
+    uri: y_test.csv
+object_type: dataset
+reader:
+  dataset_type:
+    columns:
+    - ''
+    - n2o
+    - gwp
+    dtypes:
+    - int64
+    - float64
+    - float64
+    index_cols:
+    - ''
+    type: dataframe
+  format: csv
+  type: pandas
+requirements:
+- module: pandas
+  version: 1.4.1
