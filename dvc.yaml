@@ -30,7 +30,7 @@ stages:
     - data/processed/y_train_gwp.csv
     - data/processed/y_test.csv
     outs:
-    - models/model_n2o.pkl.z
+    - models/rf_n2o
     metrics:
     - metrics.json:
         cache: false

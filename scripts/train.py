@@ -23,6 +23,17 @@ from dask.distributed import Client, LocalCluster
 import time
 import json
 
+from typing import Any, Dict
+
+import os
+from dotenv import load_dotenv
+
+#import mlflow
+from mlem.api import load, save
+
+load_dotenv()
+
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "https://dagshub.com/cwerner/residuegas.mlflow")
 
 SOURCE = Path("data") / "processed" 
 DEST = Path("models")
@@ -37,13 +48,15 @@ if __name__ == '__main__':
     random.seed(42)
 
     c = Client()
+    # mlflow.start_run()
+    # mlflow.sklearn.autolog()
 
-    X_train = pd.read_csv(SOURCE / 'x_train.csv.gz')
-    X_test = pd.read_csv(SOURCE / 'x_test.csv.gz')
-    y_train = pd.read_csv(SOURCE / 'y_train.csv.gz')
-    y_test = pd.read_csv(SOURCE / 'y_test.csv.gz')
-    y_train_n2o = pd.read_csv(SOURCE / 'y_train_n2o.csv.gz')
-    y_train_gwp = pd.read_csv(SOURCE / 'y_train_gwp.csv.gz')
+    X_train = load(str(SOURCE / "x_train.csv"))
+    X_test = load(str(SOURCE / "x_test.csv"))
+    y_train = load(str(SOURCE / "y_train.csv"))
+    y_test = load(str(SOURCE / "y_test.csv"))
+    y_train_n2o = load(str(SOURCE / "y_train_n2o.csv"))
+    y_train_gwp = load(str(SOURCE / "y_train_gwp.csv"))
     
     # assert that columns are in identical order
     # if index in files
@@ -76,8 +89,9 @@ if __name__ == '__main__':
             verbose=True, 
             n_estimators=500,
             max_features=10,
-            max_depth=15)),
-    ])
+            max_depth=15)
+            ),
+        ])
 
     with joblib.parallel_backend("dask"):
 
@@ -90,18 +104,35 @@ if __name__ == '__main__':
         print(f"SCORE N2O: {score:.2f}")
         
     # save models
-    joblib.dump(pipeline_n2o, (DEST / "model_n2o.pkl.z").resolve())
+    ##joblib.dump(pipeline_n2o, (DEST / "model_n2o.pkl.z").resolve())
+
+    # save(
+    #     pipeline_n2o.named_steps['one_hot'],
+    #     "rf_onehot_n2o",
+    #     tmp_sample_data=X_train,
+    #     tags=["random-forest", "regressor", "preprocessing"],
+    #     description="Random Forest Regressor One-Hot Encoding",
+    # )
+
+    save(
+        pipeline_n2o.named_steps['rf'],
+        str(DEST / "rf_n2o"),
+        tmp_sample_data=pipeline_n2o.named_steps['one_hot'].transform(X_train),
+        tags=["random-forest", "regressor"],
+        description="Random Forest Regressor N2O",
+        link=True, 
+        external=True
+    )
 
 
     # save metrics
-    with open('summary.json', 'w') as fp:
+    with open('metrics.json', 'w') as fp:
 
-        metrics_data = {
+        metrics_data: Dict[str, Any] = {
             "train": {"accuracy": score},
             "duration": duration
         }
-
-        json.dump(metrics_data, fp)
+        json.dump(metrics_data, fp, indent=4)
 
 
     exit()

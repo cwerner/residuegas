@@ -49,28 +49,28 @@ stages:
   training:
     cmd: python scripts/train.py
     deps:
-    - path: data/processed/x_test.csv.gz
-      md5: 6b572ec9cea5dcff7f839d9562623c4a
-      size: 57443690
-    - path: data/processed/x_train.csv.gz
-      md5: 408a81ca31b25a691538135f9c7358be
-      size: 229787557
-    - path: data/processed/y_test.csv.gz
-      md5: 5f6e2c6547e9b8db0c78deea1fb171ac
-      size: 27918024
-    - path: data/processed/y_train.csv.gz
-      md5: 9c2994ca48916076b97dda6bb0905e5a
-      size: 111698058
-    - path: data/processed/y_train_gwp.csv.gz
-      md5: 97355e20b2b2631599b704aabba08ac1
-      size: 65269187
-    - path: data/processed/y_train_n2o.csv.gz
-      md5: e8087a3fdf0003a97ac5800453dd6f73
-      size: 67607902
+    - path: data/processed/x_test.csv
+      md5: 924386faef7bdd14272f1863dd2405a5
+      size: 152436378
+    - path: data/processed/x_train.csv
+      md5: 22d3b5cde4f2af399f96b2cc777f2112
+      size: 609728440
+    - path: data/processed/y_test.csv
+      md5: 3fa8f27760978afce3a09e83d1d9e267
+      size: 55210790
+    - path: data/processed/y_train.csv
+      md5: 65a83e6b58f7a441def6880807d1f141
+      size: 220880588
+    - path: data/processed/y_train_gwp.csv
+      md5: 7af63d81ea6ce90c6532ef2b1bb97a28
+      size: 126269747
+    - path: data/processed/y_train_n2o.csv
+      md5: e7b2d70d58859506a25182cd1acbbf29
+      size: 139085230
     outs:
-    - path: models/model_n2o.pkl.z
-      md5: 0142292a2fed15048e5fb25db491cd88
-      size: 366118343
-    - path: summary.json
-      md5: b360fd3e418fb3d9765bedd87ab36069
-      size: 74
+    - path: metrics.json
+      md5: 490b101096807cf58c8555eb2d3a4233
+      size: 99
+    - path: models/rf_n2o
+      md5: aac5c92777758dc402b237a7d78e7327
+      size: 1040667005
